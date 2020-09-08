@@ -9,8 +9,8 @@ public class ContactDBHelper extends SQLiteOpenHelper {
 
 	private final String TAG = "ContactDBHelper";
 
-	private final static String DB_NAME = "contact_db"; 
-	public final static String TALBE_NAME = "contact_table";
+	private final static String DB_NAME = "contact_db";
+	public final static String TABLE_NAME = "contact_table";
 	public final static String COL_NAME = "name";
 	public final static String COL_PHONE = "phone";
 	public final static String COL_CAT = "category";
@@ -21,12 +21,15 @@ public class ContactDBHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-
+		String createSql = "create table " + TABLE_NAME + " (_id integer primary key autoincrement,"
+				+ COL_NAME + " TEXT, " + COL_PHONE + " TEXT, " + COL_CAT + " TEXT);";
+		Log.d(TAG, createSql);
+		db.execSQL(createSql);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		db.execSQL("DROP TABLE IF EXISTS " + TALBE_NAME);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 		onCreate(db);
 	}
 }

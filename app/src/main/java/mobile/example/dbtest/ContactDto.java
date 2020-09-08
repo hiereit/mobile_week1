@@ -1,13 +1,15 @@
 package mobile.example.dbtest;
 
-public class ContactDto {
+import java.io.Serializable;
+
+public class ContactDto implements Serializable {
 
 	private long id;
 	private String name;
 	private String phone;
 	private String category;
-	
-	
+
+
 	public long getId() {
 		return id;
 	}
@@ -32,10 +34,10 @@ public class ContactDto {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	
+
 	@Override
 	public String toString() {
 		return id + ". " + category + " - " + name + " (" + phone + ")";
 	}
-	
+
 }

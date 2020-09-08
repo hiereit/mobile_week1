@@ -13,8 +13,8 @@ public class InsertContactActivity extends Activity {
 	EditText etName;
 	EditText etPhone;
 	EditText etCategory;
-	
-	
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -22,17 +22,27 @@ public class InsertContactActivity extends Activity {
 
 //      DBHelper 생성
 		helper = new ContactDBHelper(this);
-		
+
 		etName = (EditText)findViewById(R.id.editText1);
 		etPhone = (EditText)findViewById(R.id.editText2);
 		etCategory = (EditText)findViewById(R.id.editText3);
 	}
-	
-	
+
+
 	public void onClick(View v) {
+		SQLiteDatabase db = helper.getWritableDatabase();
+		ContentValues row= new ContentValues();
+		row.put(ContactDBHelper.COL_NAME, etName.getText().toString());
+		row.put(ContactDBHelper.COL_PHONE, etPhone.getText().toString());
+		row.put(ContactDBHelper.COL_CAT, etCategory.getText().toString());
 
 
+		db.insert(ContactDBHelper.TABLE_NAME, null, row);
+
+//		db.execSQL("insert into " + ContactDBHelper.TABLE_NAME + " values (null, '"
+//				+ etName.getText().toString() + "', ' " + etPhone.getText().toString()
+//				+ "' , '" + etCategory.getText().toString() + "');");
+
+		helper.close();
 	}
-	
-
 }
